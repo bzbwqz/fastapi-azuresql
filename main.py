@@ -26,6 +26,22 @@ params = quote_plus("DRIVER={ODBC Driver 17 for SQL Server};"
 DATABASE_URL = f"mssql+pyodbc:///?odbc_connect={params}"
 engine = create_engine(DATABASE_URL, echo=True)
 
+
+# Set up Azure SQL DB with AAD authentication
+# params_aad = quote_plus(
+#     "Server=tcp:{servername}.database.windows.net,1433;"
+#     "Initial Catalog={database};"
+#     "Persist Security Info=False;"
+#     "User ID={your_username};"  # Replace with your AAD username
+#     "Password={your_password};"  # Replace with your AAD password
+#     "MultipleActiveResultSets=False;"
+#     "Encrypt=True;"
+#     "TrustServerCertificate=False;"
+#     "Authentication='Active Directory Password';"
+# )
+# DATABASE_URL_aad = f"mssql+pyodbc:///?odbc_connect={params_aad}"
+# engine = create_engine(DATABASE_URL_aad, echo=True)
+
 # Dependency to get DB session
 def get_db_session():
     with Session(engine) as session:
